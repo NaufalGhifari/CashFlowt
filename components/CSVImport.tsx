@@ -1,6 +1,6 @@
 import Papa from 'papaparse';
 import type { ParseError } from 'papaparse';
-import { supabase } from '@/lib/supaBaseClient';
+import { supabase } from '../lib/supaBaseClient';
 import { useState } from 'react';
 
 function parseDDMMYYYY(dateStr: string): string {

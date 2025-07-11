@@ -1,9 +1,11 @@
+'use client';
 import { useEffect, useState } from 'react';
-import { supabase } from '@/lib/supaBaseClient';
-import { useRouter } from 'next/router';
-import TransactionForm from '@/components/TransactionForm';
-import CSVImport from '@/components/CSVImport';
-import TransactionTable from '@/components/TransactionTable';
+import { supabase } from '../../lib/supaBaseClient';
+import { useRouter } from 'next/navigation';
+import TransactionForm from '../../components/TransactionForm';
+import CSVImport from '../../components/CSVImport';
+import TransactionTable from '../../components/TransactionTable';
+import ExpensesChart from '../../components/ExpensesCharts';
 
 export default function Dashboard() {
   const router = useRouter();
@@ -88,15 +90,15 @@ export default function Dashboard() {
   const [editId, setEditId] = useState<number | null>(null);
   const [editData, setEditData] = useState<any>({});
 
-  if (loading) return <p className="p-8">Loading dashboard...</p>;
+  if (loading) return <p className="p-8">Loading ledger...</p>;
 
   return (
-    <div className="p-8">
+    <div className="p-8" style={{ marginLeft: '10%', marginRight: '10%' }}>
       <h1 className="text-2xl font-bold mb-4">CashFlowt</h1>
-    
+
       {/* New Transaction Form */}
-      <TransactionForm userId={user.id} onAdd={() => router.reload()} />
-    
+      <TransactionForm userId={user.id} onAdd={() => window.location.reload()} />
+
       {/* Transactions Table */}
       <TransactionTable
         transactions={transactions}
@@ -109,18 +111,7 @@ export default function Dashboard() {
       />
 
       {/*CSV Import*/}
-      <CSVImport userId={user.id} onImport={() => router.reload()} />
-    
-      {/* Sign Out Button */}
-      <button
-        onClick={async () => {
-          await supabase.auth.signOut();
-          router.push('/login');
-        }}
-        className="mb-4 px-4 py-2 bg-red-500 text-white rounded"
-      >
-        Sign Out
-      </button>
+      <CSVImport userId={user.id} onImport={() => window.location.reload()} />
     </div>
   );
 }

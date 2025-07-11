@@ -1,7 +1,7 @@
-"use client";
+'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '@/lib/supaBaseClient';
+import { supabase } from '../../lib/supaBaseClient';
 
 export default function Login() {
   const [email, setEmail] = useState('');

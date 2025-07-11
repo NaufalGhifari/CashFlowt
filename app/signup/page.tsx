@@ -1,6 +1,7 @@
+'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { supabase } from '@/lib/supaBaseClient';
+import { supabase } from '../../lib/supaBaseClient';
 
 export default function Signup() {
   const router = useRouter();
